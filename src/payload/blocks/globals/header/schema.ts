@@ -75,7 +75,6 @@ export const Header: GlobalConfig = {
 					required: false,
 					admin: {
 						condition: (_, siblingData) => siblingData?.navigationHeaderOptions === "yes",
-						width: "50%",
 					},
 				},
 				{
