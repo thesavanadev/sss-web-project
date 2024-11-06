@@ -3,7 +3,7 @@ import { Comfortaa as FontHeader, Montserrat as FontBody } from "next/font/googl
 
 import { cn } from "@/lib/utils";
 
-//import { FooterBlock } from "@/payload/blocks/globals/footer/component";
+import { FooterBlock } from "@/payload/blocks/globals/footer/component";
 import { HeaderBlock } from "@/payload/blocks/globals/header/component";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -23,7 +23,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 
 					<main>{children}</main>
 
-					<footer className="mt-auto">Footer Goes Here</footer>
+					<footer className="mt-auto">
+						<FooterBlock />
+					</footer>
 				</ThemeProvider>
 			</body>
 		</html>
