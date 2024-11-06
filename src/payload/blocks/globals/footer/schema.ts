@@ -2,8 +2,8 @@ import { GlobalConfig } from "payload";
 
 import { anyone } from "@/payload/access/anyone";
 
-export const Header: GlobalConfig = {
-	slug: "header",
+export const Footer: GlobalConfig = {
+	slug: "footer",
 	access: {
 		read: anyone,
 	},
@@ -32,6 +32,30 @@ export const Header: GlobalConfig = {
 					label: "Site Slogan",
 					type: "text",
 					required: false,
+					admin: {
+						width: "50%",
+					},
+				},
+			],
+		},
+		{
+			type: "row",
+			fields: [
+				{
+					name: "description",
+					label: "Site Description",
+					type: "textarea",
+					required: true,
+					admin: {
+						rows: 5,
+						width: "50%",
+					},
+				},
+				{
+					name: "copyright",
+					label: "Copyright Notice",
+					type: "text",
+					required: true,
 					admin: {
 						width: "50%",
 					},
@@ -118,43 +142,6 @@ export const Header: GlobalConfig = {
 			],
 			minRows: 1,
 			maxRows: 5,
-		},
-		{
-			name: "ctaNavigationLink",
-			label: "Call to Action Link",
-			labels: {
-				singular: "Call to Action Link",
-				plural: "Call to Action Link",
-			},
-			type: "array",
-			required: false,
-			fields: [
-				{
-					type: "row",
-					fields: [
-						{
-							name: "navigationLinkLabel",
-							label: "Navigation Link Label",
-							type: "text",
-							required: true,
-							admin: {
-								width: "50%",
-							},
-						},
-						{
-							name: "navigationLinkURL",
-							label: "Navigation Link URL",
-							type: "text",
-							required: true,
-							admin: {
-								width: "50%",
-							},
-						},
-					],
-				},
-			],
-			minRows: 1,
-			maxRows: 1,
 		},
 	],
 };

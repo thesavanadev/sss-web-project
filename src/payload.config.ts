@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import { Media } from "@/payload/collections/media/schema";
 import { Users } from "@/payload/collections/users/schema";
 
+import { Footer } from "@/payload/blocks/globals/footer/schema";
 import { Header } from "@/payload/blocks/globals/header/schema";
 
 const filename = fileURLToPath(import.meta.url);
@@ -64,7 +65,7 @@ export default buildConfig({
 		defaultFromName: "Mailer @ S3",
 		apiKey: resendAPIKey,
 	}),
-	globals: [Header],
+	globals: [Header, Footer],
 	plugins: [
 		uploadthingStorage({
 			collections: {
