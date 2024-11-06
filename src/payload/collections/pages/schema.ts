@@ -3,10 +3,10 @@ import { slug } from "@/payload/fields/slug/schema";
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticated-or-published";
 
-import { populatePublishedAt } from "@/payload/collections/pages/hooks/populate-published-at";
+import { populatePublishedOn } from "@/payload/collections/pages/hooks/populate-published-on";
 import { revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 
-import type { CollectionConfig } from "payload";
+import { CollectionConfig } from "payload";
 
 export const Pages: CollectionConfig = {
 	slug: "pages",
@@ -33,9 +33,14 @@ export const Pages: CollectionConfig = {
 		},
 		...slug(),
 		{
-			name: "publishedAt",
+			name: "publishedOn",
+			label: "Published On",
 			type: "date",
 			admin: {
+				date: {
+					pickerAppearance: "dayOnly",
+					displayFormat: "do MMM yyyy",
+				},
 				position: "sidebar",
 			},
 		},
@@ -45,7 +50,18 @@ export const Pages: CollectionConfig = {
 				{
 					name: "content",
 					label: "Content",
-					fields: [],
+					fields: [
+						{
+							name: "layout",
+							label: "Layout",
+							labels: {
+								singular: "Layout Block",
+								plural: "Layout Blocks",
+							},
+							type: "blocks",
+							blocks: [],
+						},
+					],
 				},
 				{
 					name: "seo",
@@ -57,7 +73,7 @@ export const Pages: CollectionConfig = {
 	],
 	hooks: {
 		afterChange: [revalidatePage],
-		beforeChange: [populatePublishedAt],
+		beforeChange: [populatePublishedOn],
 	},
 	versions: {
 		drafts: {

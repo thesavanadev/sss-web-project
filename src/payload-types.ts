@@ -73,8 +73,10 @@ export interface Page {
   title: string;
   slug: string;
   slugLock?: boolean | null;
-  publishedAt?: string | null;
-  content?: {};
+  publishedOn?: string | null;
+  content?: {
+    layout?: unknown[] | null;
+  };
   seo?: {};
   updatedAt: string;
   createdAt: string;
@@ -189,8 +191,12 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
-  publishedAt?: T;
-  content?: T | {};
+  publishedOn?: T;
+  content?:
+    | T
+    | {
+        layout?: T | {};
+      };
   seo?: T | {};
   updatedAt?: T;
   createdAt?: T;
