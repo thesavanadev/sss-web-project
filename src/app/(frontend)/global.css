@@ -78,3 +78,13 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+@layer components {
+	.nav-link-hover-underline-header {
+		@apply text-base text-muted-foreground hover:underline;
+	}
+
+	.nav-link-hover-underline-footer {
+		@apply mt-2 block text-base text-muted-foreground hover:underline;
+	}
+}
