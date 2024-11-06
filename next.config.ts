@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "payload-st.s3interdev.com",
+				hostname: "s3.co.ke",
 			},
 		],
 	},
