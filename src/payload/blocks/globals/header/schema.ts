@@ -110,6 +110,7 @@ export const Header: GlobalConfig = {
 								},
 							],
 						},
+
 						{
 							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
@@ -119,6 +120,7 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
+
 					],
 					minRows: 1,
 					maxRows: 5,
@@ -158,6 +160,7 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
+
 						{
 							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
@@ -167,6 +170,7 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
+
 					],
 				},
 			],

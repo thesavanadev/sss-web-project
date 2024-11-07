@@ -134,6 +134,7 @@ export const Footer: GlobalConfig = {
 								},
 							],
 						},
+
 						{
 							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
@@ -143,6 +144,7 @@ export const Footer: GlobalConfig = {
 								width: "50%",
 							},
 						},
+
 					],
 					minRows: 1,
 					maxRows: 5,

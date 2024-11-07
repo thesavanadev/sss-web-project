@@ -322,7 +322,9 @@ export interface Header {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+
               navigationLinkNewTab?: boolean | null;
+
               id?: string | null;
             }[]
           | null;
@@ -333,7 +335,9 @@ export interface Header {
     | {
         navigationLinkLabel: string;
         navigationLinkURL: string;
+
         navigationLinkNewTab?: boolean | null;
+
         id?: string | null;
       }[]
     | null;
@@ -359,7 +363,9 @@ export interface Footer {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+
               navigationLinkNewTab?: boolean | null;
+
               id?: string | null;
             }[]
           | null;
@@ -387,7 +393,9 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+
               navigationLinkNewTab?: T;
+
               id?: T;
             };
         id?: T;
@@ -397,7 +405,9 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         navigationLinkLabel?: T;
         navigationLinkURL?: T;
+
         navigationLinkNewTab?: T;
+
         id?: T;
       };
   updatedAt?: T;
@@ -424,7 +434,9 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+
               navigationLinkNewTab?: T;
+
               id?: T;
             };
         id?: T;
