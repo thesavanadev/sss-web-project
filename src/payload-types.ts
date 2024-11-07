@@ -81,8 +81,7 @@ export interface Page {
         heroSubtitle?: string | null;
         heroTitle: string;
         heroMessage?: string | null;
-        heroCoverImage: string | Media;
-        heroEnableCTA: boolean;
+        heroCover: string | Media;
         heroCTA?:
           | {
               heroCTALabel: string;
@@ -220,8 +219,7 @@ export interface PagesSelect<T extends boolean = true> {
               heroSubtitle?: T;
               heroTitle?: T;
               heroMessage?: T;
-              heroCoverImage?: T;
-              heroEnableCTA?: T;
+              heroCover?: T;
               heroCTA?:
                 | T
                 | {

@@ -62,7 +62,7 @@ const Page = async ({ params }: { params: Promise<{ slug?: string }> }) => {
 	const { layout } = page;
 
 	return (
-		<article className="pb-16 pt-5">
+		<article>
 			<RenderBlocks blocks={layout ?? []} />
 		</article>
 	);

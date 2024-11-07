@@ -57,18 +57,11 @@ export const Hero: Block = {
 			required: false,
 		},
 		{
-			name: "heroCoverImage",
+			name: "heroCover",
 			label: "Cover Image",
 			type: "upload",
 			relationTo: "media",
 			required: true,
-		},
-		{
-			name: "heroEnableCTA",
-			label: "Enable Call to Action?",
-			type: "checkbox",
-			required: true,
-			defaultValue: "false",
 		},
 		{
 			name: "heroCTA",
@@ -107,7 +100,7 @@ export const Hero: Block = {
 			minRows: 1,
 			maxRows: 1,
 			admin: {
-				condition: (_, siblingData) => (siblingData?.heroEnableCTA ? true : false),
+				condition: (_, siblingData) => (siblingData?.heroType === "homepage" ? true : false),
 			},
 		},
 	],
