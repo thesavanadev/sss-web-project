@@ -15,7 +15,7 @@ export const HeaderBlock = async () => {
 			});
 		},
 		["header"],
-		{ revalidate: 60, tags: ["header"] },
+		{ revalidate: 20, tags: ["header"] },
 	);
 
 	const header = await getNavigationHeader();
