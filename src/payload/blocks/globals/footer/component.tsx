@@ -15,7 +15,7 @@ export const FooterBlock = async () => {
 			});
 		},
 		["footer"],
-		{ revalidate: 60, tags: ["footer"] },
+		{ revalidate: 20, tags: ["footer"] },
 	);
 
 	const footer = await getNavigationFooter();
