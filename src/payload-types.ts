@@ -74,10 +74,14 @@ export interface Page {
   slug: string;
   slugLock?: boolean | null;
   publishedOn?: string | null;
-  content?: {
-    layout?: unknown[] | null;
-  };
-  seo?: {};
+  layout?:
+    | {
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }[]
+    | null;
+  meta?: {};
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -192,12 +196,17 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   publishedOn?: T;
-  content?:
+  layout?:
     | T
     | {
-        layout?: T | {};
+        hero?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
       };
-  seo?: T | {};
+  meta?: T | {};
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

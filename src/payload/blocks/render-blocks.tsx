@@ -1,6 +1,8 @@
 // @ts-nocheck
 import { Fragment } from "react";
 
+import { HeroBlock } from "@/payload/blocks/hero/component";
+
 import type { Page } from "@/payload-types";
 
 type RenderBlocksProps = {
@@ -8,7 +10,9 @@ type RenderBlocksProps = {
 };
 
 // mapping block slugs to their respective components
-const blockComponents = {};
+const blockComponents = {
+	hero: HeroBlock,
+};
 
 export const RenderBlocks = (props: RenderBlocksProps) => {
 	const { blocks } = props;

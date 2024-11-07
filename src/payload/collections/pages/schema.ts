@@ -6,7 +6,9 @@ import { authenticatedOrPublished } from "@/payload/access/authenticated-or-publ
 import { populatePublishedOn } from "@/payload/collections/pages/hooks/populate-published-on";
 import { revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 
-import { CollectionConfig } from "payload";
+import { Hero } from "@/payload/blocks/hero/schema";
+
+import type { CollectionConfig } from "payload";
 
 export const Pages: CollectionConfig = {
 	slug: "pages",
@@ -48,7 +50,6 @@ export const Pages: CollectionConfig = {
 			type: "tabs",
 			tabs: [
 				{
-					name: "content",
 					label: "Content",
 					fields: [
 						{
@@ -59,12 +60,12 @@ export const Pages: CollectionConfig = {
 								plural: "Layout Blocks",
 							},
 							type: "blocks",
-							blocks: [],
+							blocks: [Hero],
 						},
 					],
 				},
 				{
-					name: "seo",
+					name: "meta",
 					label: "SEO",
 					fields: [],
 				},
