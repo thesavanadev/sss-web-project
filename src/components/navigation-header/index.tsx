@@ -52,7 +52,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 										<Link
 											key={link.id}
 											href={link.navigationLinkURL}
-											target={link.navigationNewTab ? "_blank" : "_self"}
+											target={link.navigationLinkNewTab ? "_blank" : "_self"}
 											className="nav-link-hover-underline-header"
 										>
 											{link.navigationLinkLabel}
@@ -65,7 +65,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 						<Button variant="outline" className="uppercase">
 							{header.ctaNavigationLink?.map((link) => {
 								return (
-									<Link key={link.id} href={link.navigationLinkURL} target={link.navigationNewTab ? "_blank" : "_self"}>
+									<Link key={link.id} href={link.navigationLinkURL} target={link.navigationLinkNewTab ? "_blank" : "_self"}>
 										{link.navigationLinkLabel}
 									</Link>
 								);

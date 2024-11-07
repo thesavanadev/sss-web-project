@@ -47,7 +47,7 @@ export const NavigationFooter = ({ footer }: NavigationFooterProps) => {
 											<Link
 												key={link.id}
 												href={link.navigationLinkURL}
-												target={link.navigationNewTab ? "_blank" : "_self"}
+												target={link.navigationLinkNewTab ? "_blank" : "_self"}
 												className="nav-link-hover-underline-footer"
 											>
 												{link.navigationLinkLabel}

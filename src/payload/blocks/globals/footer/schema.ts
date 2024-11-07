@@ -135,7 +135,7 @@ export const Footer: GlobalConfig = {
 							],
 						},
 						{
-							name: "navigationNewTab",
+							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
 							type: "checkbox",
 							required: false,

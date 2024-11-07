@@ -111,7 +111,7 @@ export const Header: GlobalConfig = {
 							],
 						},
 						{
-							name: "navigationNewTab",
+							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
 							type: "checkbox",
 							required: false,
@@ -159,7 +159,7 @@ export const Header: GlobalConfig = {
 							},
 						},
 						{
-							name: "navigationNewTab",
+							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
 							type: "checkbox",
 							required: false,
