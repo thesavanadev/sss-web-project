@@ -76,6 +76,19 @@ export interface Page {
   publishedOn?: string | null;
   layout?:
     | {
+        heroType?: ('homepage' | 'subpage') | null;
+        heroSubtitle?: string | null;
+        heroTitle: string;
+        heroMessage?: string | null;
+        heroCoverImage: string | Media;
+        heroEnableCTA: boolean;
+        heroCTA?:
+          | {
+              heroCTALabel: string;
+              heroCTAUrl: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
@@ -202,6 +215,19 @@ export interface PagesSelect<T extends boolean = true> {
         hero?:
           | T
           | {
+              heroType?: T;
+              heroSubtitle?: T;
+              heroTitle?: T;
+              heroMessage?: T;
+              heroCoverImage?: T;
+              heroEnableCTA?: T;
+              heroCTA?:
+                | T
+                | {
+                    heroCTALabel?: T;
+                    heroCTAUrl?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -297,6 +323,7 @@ export interface Header {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+              navigationNewTab?: boolean | null;
               id?: string | null;
             }[]
           | null;
@@ -307,6 +334,7 @@ export interface Header {
     | {
         navigationLinkLabel: string;
         navigationLinkURL: string;
+        navigationNewTab?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -332,6 +360,7 @@ export interface Footer {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+              navigationNewTab?: boolean | null;
               id?: string | null;
             }[]
           | null;
@@ -359,6 +388,7 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+              navigationNewTab?: T;
               id?: T;
             };
         id?: T;
@@ -368,6 +398,7 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         navigationLinkLabel?: T;
         navigationLinkURL?: T;
+        navigationNewTab?: T;
         id?: T;
       };
   updatedAt?: T;
@@ -394,6 +425,7 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+              navigationNewTab?: T;
               id?: T;
             };
         id?: T;

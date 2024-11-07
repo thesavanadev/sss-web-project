@@ -110,6 +110,15 @@ export const Header: GlobalConfig = {
 								},
 							],
 						},
+						{
+							name: "navigationNewTab",
+							label: "Open in New Tab",
+							type: "checkbox",
+							required: false,
+							admin: {
+								width: "50%",
+							},
+						},
 					],
 					minRows: 1,
 					maxRows: 5,
@@ -145,6 +154,15 @@ export const Header: GlobalConfig = {
 							label: "Navigation Link URL",
 							type: "text",
 							required: true,
+							admin: {
+								width: "50%",
+							},
+						},
+						{
+							name: "navigationNewTab",
+							label: "Open in New Tab",
+							type: "checkbox",
+							required: false,
 							admin: {
 								width: "50%",
 							},
