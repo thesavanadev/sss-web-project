@@ -134,6 +134,15 @@ export const Footer: GlobalConfig = {
 								},
 							],
 						},
+						{
+							name: "navigationLinkNewTab",
+							label: "Open in New Tab",
+							type: "checkbox",
+							required: false,
+							admin: {
+								width: "50%",
+							},
+						},
 					],
 					minRows: 1,
 					maxRows: 5,

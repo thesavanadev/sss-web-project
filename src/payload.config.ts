@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Media } from "@/payload/collections/media/schema";
+import { Pages } from "@/payload/collections/pages/schema";
 import { Users } from "@/payload/collections/users/schema";
 
 import { Footer } from "@/payload/blocks/globals/footer/schema";
@@ -27,7 +28,7 @@ export default buildConfig({
 		},
 		user: Users.slug,
 	},
-	collections: [Media, Users],
+	collections: [Pages, Media, Users],
 	db: mongooseAdapter({ url: databaseURI }),
 	editor: lexicalEditor({
 		features: () => {
@@ -36,7 +37,7 @@ export default buildConfig({
 				BoldFeature(),
 				ItalicFeature(),
 				LinkFeature({
-					enabledCollections: [],
+					enabledCollections: ["pages"],
 					fields: ({ defaultFields }) => {
 						const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
 							if ("name" in field && field.name === "url") return false;
