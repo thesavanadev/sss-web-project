@@ -33,7 +33,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 
 	return (
 		<nav
-			className={`fixed z-50 w-full transition-all duration-300 ${isScrolled ? "bg-background/95 shadow-md backdrop-blur-sm" : "bg-transparent"}`}
+			className={`fixed z-50 w-full transition-all duration-300 ${isScrolled ? "bg-background/90 shadow-md backdrop-blur-sm" : "bg-transparent"}`}
 		>
 			<Container className="py-5">
 				<div className="flex items-center justify-between">
@@ -49,7 +49,14 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 							{header.navigationLinks?.map((links) => (
 								<div key={links.id} className="space-x-8">
 									{links.navigationLink?.map((link) => (
-										<Link key={link.id} href={link.navigationLinkURL} className="nav-link-hover-underline-header">
+
+										<Link
+											key={link.id}
+											href={link.navigationLinkURL}
+											target={link.navigationLinkNewTab ? "_blank" : "_self"}
+											className="nav-link-hover-underline-header"
+										>
+
 											{link.navigationLinkLabel}
 										</Link>
 									))}
@@ -57,10 +64,11 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 							))}
 						</>
 
-						<Button variant="outline" className="uppercase">
+
+						<Button size="lg" className="rounded-lg font-semibold uppercase">
 							{header.ctaNavigationLink?.map((link) => {
 								return (
-									<Link key={link.id} href={link.navigationLinkURL}>
+									<Link key={link.id} href={link.navigationLinkURL} target={link.navigationLinkNewTab ? "_blank" : "_self"}>
 										{link.navigationLinkLabel}
 									</Link>
 								);
@@ -76,7 +84,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 						</SheetTrigger>
 
 						<SheetContent side="right" className="w-[300px] sm:w-[400px]">
-							<SheetHeader className="mb-5 py-3 text-left font-semibold">
+							<SheetHeader className="mb-5 py-3 text-left font-header font-semibold">
 								<SheetTitle className="text-primary">{header.title}</SheetTitle>
 								<SheetDescription className="text-xs">{header.slogan}</SheetDescription>
 							</SheetHeader>
@@ -94,7 +102,9 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 									))}
 								</>
 
-								<Button variant="outline" className="w-full text-lg uppercase">
+
+								<Button size="lg" className="w-full rounded-lg font-semibold uppercase">
+
 									{header.ctaNavigationLink?.map((link) => {
 										return (
 											<Link key={link.id} href={link.navigationLinkURL}>

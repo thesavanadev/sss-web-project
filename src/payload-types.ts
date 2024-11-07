@@ -11,13 +11,16 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
+    pages: Page;
     media: Media;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
   collectionsSelect: {
+    pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -61,6 +64,40 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  slugLock?: boolean | null;
+  publishedOn?: string | null;
+  layout?:
+    | {
+        heroType?: ('homepage' | 'subpage') | null;
+        heroSubtitle?: string | null;
+        heroTitle: string;
+        heroMessage?: string | null;
+        heroCover: string | Media;
+        heroCTA?:
+          | {
+              heroCTALabel: string;
+              heroCTAUrl: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }[]
+    | null;
+  meta?: {};
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -110,6 +147,10 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'pages';
+        value: string | Page;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -158,6 +199,42 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  publishedOn?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              heroType?: T;
+              heroSubtitle?: T;
+              heroTitle?: T;
+              heroMessage?: T;
+              heroCover?: T;
+              heroCTA?:
+                | T
+                | {
+                    heroCTALabel?: T;
+                    heroCTAUrl?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  meta?: T | {};
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -245,6 +322,9 @@ export interface Header {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+
+              navigationLinkNewTab?: boolean | null;
+
               id?: string | null;
             }[]
           | null;
@@ -255,6 +335,9 @@ export interface Header {
     | {
         navigationLinkLabel: string;
         navigationLinkURL: string;
+
+        navigationLinkNewTab?: boolean | null;
+
         id?: string | null;
       }[]
     | null;
@@ -280,6 +363,9 @@ export interface Footer {
           | {
               navigationLinkLabel: string;
               navigationLinkURL: string;
+
+              navigationLinkNewTab?: boolean | null;
+
               id?: string | null;
             }[]
           | null;
@@ -307,6 +393,9 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+
+              navigationLinkNewTab?: T;
+
               id?: T;
             };
         id?: T;
@@ -316,6 +405,9 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         navigationLinkLabel?: T;
         navigationLinkURL?: T;
+
+        navigationLinkNewTab?: T;
+
         id?: T;
       };
   updatedAt?: T;
@@ -342,6 +434,9 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               navigationLinkLabel?: T;
               navigationLinkURL?: T;
+
+              navigationLinkNewTab?: T;
+
               id?: T;
             };
         id?: T;

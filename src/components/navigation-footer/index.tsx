@@ -31,7 +31,8 @@ export const NavigationFooter = ({ footer }: NavigationFooterProps) => {
 
 						<p className="mt-2 text-left text-muted-foreground">{footer.description}</p>
 
-						<p className="mt-5 font-semibold text-primary">{footer.slogan}</p>
+						<p className="mt-5 font-header font-semibold text-primary">{footer.slogan}</p>
+
 					</div>
 
 					<div className="mt-6 lg:mt-0 lg:flex-1">
@@ -44,7 +45,12 @@ export const NavigationFooter = ({ footer }: NavigationFooterProps) => {
 
 									<>
 										{links.navigationLink?.map((link) => (
-											<Link key={link.id} href={link.navigationLinkURL} className="nav-link-hover-underline-footer">
+											<Link
+												key={link.id}
+												href={link.navigationLinkURL}
+												target={link.navigationLinkNewTab ? "_blank" : "_self"}
+												className="nav-link-hover-underline-footer"
+											>
 												{link.navigationLinkLabel}
 											</Link>
 										))}
