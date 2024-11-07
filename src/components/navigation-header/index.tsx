@@ -81,7 +81,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 						</SheetTrigger>
 
 						<SheetContent side="right" className="w-[300px] sm:w-[400px]">
-							<SheetHeader className="mb-5 py-3 text-left font-semibold">
+							<SheetHeader className="mb-5 py-3 text-left font-header font-semibold">
 								<SheetTitle className="text-primary">{header.title}</SheetTitle>
 								<SheetDescription className="text-xs">{header.slogan}</SheetDescription>
 							</SheetHeader>
