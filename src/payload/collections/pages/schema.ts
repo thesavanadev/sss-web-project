@@ -1,4 +1,4 @@
-import { slug } from "@/payload/fields/slug/schema";
+import { slugField } from "@/payload/fields/slug/schema";
 
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticated-or-published";
@@ -33,7 +33,7 @@ export const Pages: CollectionConfig = {
 			type: "text",
 			required: true,
 		},
-		...slug(),
+		...slugField(),
 		{
 			name: "publishedOn",
 			label: "Published On",
