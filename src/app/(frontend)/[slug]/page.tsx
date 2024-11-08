@@ -12,6 +12,8 @@ import type { Page } from "@/payload-types";
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode();
 
+	const parsedSlug = decodeURIComponent(slug);
+
 	const payload = await getPayloadHMR({ config: config });
 
 	const result = await payload.find({
@@ -21,7 +23,7 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 		overrideAccess: draft,
 		where: {
 			slug: {
-				equals: slug,
+				equals: parsedSlug,
 			},
 		},
 	});
