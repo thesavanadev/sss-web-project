@@ -12,18 +12,16 @@ import type { Page } from "@/payload-types";
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode();
 
-	const parsedSlug = decodeURIComponent(slug);
+	const payload = await getPayloadHMR({ config: config });
 
-	const data = await getPayloadHMR({ config: config });
-
-	const result = await data.find({
+	const result = await payload.find({
 		collection: "pages",
 		draft,
 		limit: 1,
-		overrideAccess: true,
+		overrideAccess: draft,
 		where: {
 			slug: {
-				equals: parsedSlug,
+				equals: slug,
 			},
 		},
 	});
@@ -32,26 +30,34 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 });
 
 export const generateStaticParams = async () => {
-	const data = await getPayloadHMR({ config: config });
+	const payload = await getPayloadHMR({ config: config });
 
-	const pages = await data.find({
+	const pages = await payload.find({
 		collection: "pages",
 		draft: false,
 		limit: 1000,
 		overrideAccess: false,
 	});
 
-	return pages.docs
-		?.filter((doc: Page) => {
+	const params = pages.docs
+		?.filter((doc) => {
 			return doc.slug !== "home";
 		})
-		.map(({ slug }: Page) => slug);
+		.map(({ slug }) => {
+			return { slug };
+		});
+
+	return params;
 };
 
-const Page = async ({ params }: { params: Promise<{ slug?: string }> }) => {
-	const { slug = "home" } = await params;
+type Args = {
+	params: Promise<{ slug?: string }>;
+};
 
-	let page: Page | undefined | null;
+const Page = async ({ params: paramsPromise }: Args) => {
+	const { slug = "home" } = await paramsPromise;
+
+	let page: Page | null;
 
 	page = await queryPageBySlug({ slug });
 

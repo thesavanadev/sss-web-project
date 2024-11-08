@@ -72,7 +72,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  slug: string;
+  slug?: string | null;
   slugLock?: boolean | null;
   publishedOn?: string | null;
   layout?:

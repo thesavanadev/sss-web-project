@@ -23,7 +23,7 @@ export const HeroBlock = ({ heroType, heroSubtitle, heroTitle, heroMessage, hero
 			<div
 				className={cn("relative left-0 top-0 flex w-full items-center justify-center rounded-lg bg-cover bg-center", {
 					"h-[50rem]": heroType === "homepage",
-					"h-[40rem]": heroType === "subpage",
+					"h-[30rem]": heroType === "subpage",
 				})}
 				style={{
 					backgroundImage: `url(${serverURL}${src})`,
