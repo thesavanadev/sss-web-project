@@ -70,10 +70,10 @@
 
 @layer components {
 	.nav-link-hover-underline-header {
-		@apply text-base font-semibold text-foreground hover:underline;
+		@apply text-base text-foreground hover:underline;
 	}
 
 	.nav-link-hover-underline-footer {
-		@apply mt-2 block text-base font-semibold text-foreground hover:underline;
+		@apply mt-2 block text-base text-foreground hover:underline;
 	}
 }

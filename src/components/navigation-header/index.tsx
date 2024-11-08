@@ -49,21 +49,18 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 							{header.navigationLinks?.map((links) => (
 								<div key={links.id} className="space-x-8">
 									{links.navigationLink?.map((link) => (
-
 										<Link
 											key={link.id}
 											href={link.navigationLinkURL}
 											target={link.navigationLinkNewTab ? "_blank" : "_self"}
 											className="nav-link-hover-underline-header"
 										>
-
 											{link.navigationLinkLabel}
 										</Link>
 									))}
 								</div>
 							))}
 						</>
-
 
 						<Button size="lg" className="rounded-lg font-semibold uppercase">
 							{header.ctaNavigationLink?.map((link) => {
@@ -86,7 +83,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 						<SheetContent side="right" className="w-[300px] sm:w-[400px]">
 							<SheetHeader className="mb-5 py-3 text-left font-header font-semibold">
 								<SheetTitle className="text-primary">{header.title}</SheetTitle>
-								<SheetDescription className="text-xs">{header.slogan}</SheetDescription>
+								<SheetDescription className="text-xs text-primary">{header.slogan}</SheetDescription>
 							</SheetHeader>
 
 							<nav className="flex flex-col space-y-8">
@@ -102,9 +99,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 									))}
 								</>
 
-
 								<Button size="lg" className="w-full rounded-lg font-semibold uppercase">
-
 									{header.ctaNavigationLink?.map((link) => {
 										return (
 											<Link key={link.id} href={link.navigationLinkURL}>
