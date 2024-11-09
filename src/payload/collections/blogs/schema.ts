@@ -65,7 +65,26 @@ export const Blogs: CollectionConfig = {
 			tabs: [
 				{
 					label: "Content",
-					fields: [],
+					fields: [
+						{
+							name: "content",
+							label: false,
+							type: "richText",
+							required: true,
+							editor: lexicalEditor({
+								features: ({ rootFeatures }) => {
+									return [
+										...rootFeatures,
+										HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
+										// BlocksFeature({ blocks: [ Banner, Code, MediaBlock ] }),
+										FixedToolbarFeature(),
+										InlineToolbarFeature(),
+										HorizontalRuleFeature(),
+									];
+								},
+							}),
+						},
+					],
 				},
 				{
 					label: "Meta",

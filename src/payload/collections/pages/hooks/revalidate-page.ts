@@ -6,7 +6,7 @@ import type { Page } from "@/payload-types";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({ doc, previousDoc, req: { payload } }) => {
 	if (doc._status === "published") {
-		const path = doc.slug === "home" ? "/" : `/${doc.slug}`;
+		const path = doc.slug === "index" ? "/" : `/${doc.slug}`;
 
 		payload.logger.info(`Revalidating page at ${path}...`);
 
@@ -15,7 +15,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({ doc, previousD
 
 	// if the page was previously published, we need to revalidate the old path
 	if (previousDoc?._status === "published" && doc._status !== "published") {
-		const oldPath = previousDoc.slug === "home" ? "/" : `/${previousDoc.slug}`;
+		const oldPath = previousDoc.slug === "index" ? "/" : `/${previousDoc.slug}`;
 
 		payload.logger.info(`Revalidating old page at ${oldPath}...`);
 
