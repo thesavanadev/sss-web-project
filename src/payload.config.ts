@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Blogs } from "@/payload/collections/blogs/schema";
+import { Categories } from "@/payload/collections/categories/schema";
 import { Media } from "@/payload/collections/media/schema";
 import { Pages } from "@/payload/collections/pages/schema";
 import { Users } from "@/payload/collections/users/schema";
@@ -64,7 +65,7 @@ export default buildConfig({
 		},
 		user: Users.slug,
 	},
-	collections: [Pages, Blogs, Media, Users],
+	collections: [Pages, Blogs, Categories, Media, Users],
 	db: mongooseAdapter({ url: databaseURI }),
 	editor: lexicalEditor({
 		features: () => {

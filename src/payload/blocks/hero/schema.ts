@@ -28,6 +28,13 @@ export const Hero: Block = {
 			},
 		},
 		{
+			name: "heroCover",
+			label: "Cover Image",
+			type: "upload",
+			relationTo: "media",
+			required: true,
+		},
+		{
 			type: "row",
 			fields: [
 				{
@@ -55,13 +62,6 @@ export const Hero: Block = {
 			label: "Message",
 			type: "textarea",
 			required: false,
-		},
-		{
-			name: "heroCover",
-			label: "Cover Image",
-			type: "upload",
-			relationTo: "media",
-			required: true,
 		},
 		{
 			name: "heroCTA",

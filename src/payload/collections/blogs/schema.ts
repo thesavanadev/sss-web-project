@@ -26,8 +26,8 @@ const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBL
 export const Blogs: CollectionConfig = {
 	slug: "blogs",
 	labels: {
-		singular: "Blog",
-		plural: "Blogs",
+		singular: "Blog Post",
+		plural: "Blog Posts",
 	},
 	access: {
 		create: authenticated,
@@ -148,7 +148,34 @@ export const Blogs: CollectionConfig = {
 				},
 				{
 					label: "Meta",
-					fields: [],
+					fields: [
+						{
+							name: "relatedPosts",
+							label: "Related Posts",
+							type: "relationship",
+							relationTo: "blogs",
+							hasMany: true,
+							admin: {
+								position: "sidebar",
+							},
+							filterOptions: ({ id }) => {
+								return {
+									id: {
+										not_in: [id],
+									},
+								};
+							},
+						},
+						{
+							name: "categories",
+							type: "relationship",
+							relationTo: "categories",
+							hasMany: true,
+							admin: {
+								position: "sidebar",
+							},
+						},
+					],
 				},
 				{
 					name: "meta",
