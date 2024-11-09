@@ -5,16 +5,12 @@ import { HeroBlock } from "@/payload/blocks/hero/component";
 
 import type { Page } from "@/payload-types";
 
-type RenderBlocksProps = {
-	blocks: Page["layout"][0][];
-};
-
 // mapping block slugs to their respective components
 const blockComponents = {
 	hero: HeroBlock,
 };
 
-export const RenderBlocks = (props: RenderBlocksProps) => {
+export const RenderBlocks = (props: { blocks: Page["layout"][0][] }) => {
 	const { blocks } = props;
 
 	const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;

@@ -75,26 +75,28 @@ export interface Page {
   slug?: string | null;
   slugLock?: boolean | null;
   publishedOn?: string | null;
-  layout?:
-    | {
-        heroType?: ('homepage' | 'subpage') | null;
-        heroSubtitle?: string | null;
-        heroTitle: string;
-        heroMessage?: string | null;
-        heroCover: string | Media;
-        heroCTA?:
-          | {
-              heroCTALabel: string;
-              heroCTAUrl: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'hero';
-      }[]
-    | null;
-  meta?: {};
+  layout: {
+    heroType?: ('homepage' | 'subpage') | null;
+    heroSubtitle?: string | null;
+    heroTitle: string;
+    heroMessage?: string | null;
+    heroCover: string | Media;
+    heroCTA?:
+      | {
+          heroCTALabel: string;
+          heroCTAUrl: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'hero';
+  }[];
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -231,7 +233,15 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
-  meta?: T | {};
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        image?: T;
+        description?: T;
+        preview?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

@@ -1,6 +1,7 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { resendAdapter } from "@payloadcms/email-resend";
-import { BoldFeature, ItalicFeature, LinkFeature, UnderlineFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
+import { BoldFeature, ItalicFeature, LinkFeature, ParagraphFeature, UnderlineFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { buildConfig } from "payload";
 import path from "path";
@@ -14,17 +15,51 @@ import { Users } from "@/payload/collections/users/schema";
 import { Footer } from "@/payload/blocks/globals/footer/schema";
 import { Header } from "@/payload/blocks/globals/header/schema";
 
+import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
+import { Page } from "@/payload-types";
+
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const databaseURI = process.env.NODE_ENV === "development" ? process.env.DATABASE_URI_DEV! : process.env.DATABASE_URI_PRD!;
 const payloadSecret = process.env.PAYLOAD_SECRET!;
 const resendAPIKey = process.env.RESEND_API_KEY!;
 const uploadthingSecret = process.env.UPLOADTHING_SECRET!;
+const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
+
+const generateTitle: GenerateTitle<Page> = ({ doc }) => {
+	return doc?.title ? `${doc.title} | Superior Software Solutions` : "Superior Software Solutions";
+};
+
+const generateURL: GenerateURL<Page> = ({ doc }) => {
+	return doc?.slug ? `${publicURL}/${doc.slug}` : publicURL;
+};
 
 export default buildConfig({
 	admin: {
 		importMap: {
 			baseDir: path.resolve(dirname),
+		},
+		livePreview: {
+			breakpoints: [
+				{
+					label: "Mobile",
+					name: "mobile",
+					height: 667,
+					width: 375,
+				},
+				{
+					label: "Tablet",
+					name: "tablet",
+					height: 1024,
+					width: 768,
+				},
+				{
+					label: "Desktop",
+					name: "desktop",
+					height: 900,
+					width: 1440,
+				},
+			],
 		},
 		user: Users.slug,
 	},
@@ -33,6 +68,7 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: () => {
 			return [
+				ParagraphFeature(),
 				UnderlineFeature(),
 				BoldFeature(),
 				ItalicFeature(),
@@ -68,6 +104,7 @@ export default buildConfig({
 	}),
 	globals: [Header, Footer],
 	plugins: [
+		seoPlugin({ generateTitle, generateURL }),
 		uploadthingStorage({
 			collections: {
 				[Media.slug]: true,

@@ -5,8 +5,11 @@ import { notFound } from "next/navigation";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import config from "@payload-config";
 
+import { generateMeta } from "@/lib/generate-meta";
+
 import { RenderBlocks } from "@/payload/blocks/render-blocks";
 
+import type { Metadata } from "next";
 import type { Page } from "@/payload-types";
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
@@ -77,3 +80,11 @@ const Page = async ({ params: paramsPromise }: Args) => {
 };
 
 export default Page;
+
+export const generateMetadata = async ({ params: paramsPromise }: Args): Promise<Metadata> => {
+	const { slug = "home" } = await paramsPromise;
+
+	const page = await queryPageBySlug({ slug });
+
+	return generateMeta({ doc: page });
+};

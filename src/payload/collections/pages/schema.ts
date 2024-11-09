@@ -1,3 +1,7 @@
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
+
+import { generatePreviewPath } from "@/lib/generate-preview-path";
+
 import { slugField } from "@/payload/fields/slug/schema";
 
 import { authenticated } from "@/payload/access/authenticated";
@@ -9,6 +13,8 @@ import { revalidatePage } from "@/payload/collections/pages/hooks/revalidate-pag
 import { Hero } from "@/payload/blocks/hero/schema";
 
 import type { CollectionConfig } from "payload";
+
+const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
 
 export const Pages: CollectionConfig = {
 	slug: "pages",
@@ -24,6 +30,24 @@ export const Pages: CollectionConfig = {
 	},
 	admin: {
 		defaultColumns: ["title", "slug", "createdAt", "updatedAt"],
+		livePreview: {
+			url: ({ data }) => {
+				const path = generatePreviewPath({
+					slug: typeof data?.slug === "string" ? data.slug : "",
+					collection: "pages",
+				});
+
+				return `${publicURL}${path}`;
+			},
+		},
+		preview: (data) => {
+			const path = generatePreviewPath({
+				slug: typeof data?.slug === "string" ? data.slug : "",
+				collection: "pages",
+			});
+
+			return `${publicURL}${path}`;
+		},
 		useAsTitle: "title",
 	},
 	fields: [
@@ -60,6 +84,7 @@ export const Pages: CollectionConfig = {
 								plural: "Layout Blocks",
 							},
 							type: "blocks",
+							required: true,
 							blocks: [Hero],
 						},
 					],
@@ -67,7 +92,25 @@ export const Pages: CollectionConfig = {
 				{
 					name: "meta",
 					label: "SEO",
-					fields: [],
+					fields: [
+						OverviewField({
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+							imagePath: "meta.image",
+						}),
+						MetaTitleField({
+							hasGenerateFn: true,
+						}),
+						MetaImageField({
+							relationTo: "media",
+						}),
+						MetaDescriptionField({}),
+						PreviewField({
+							hasGenerateFn: true,
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+						}),
+					],
 				},
 			],
 		},
