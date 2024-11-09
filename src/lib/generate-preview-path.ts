@@ -1,6 +1,6 @@
 import { CollectionSlug } from "payload";
 
-const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = { pages: "" };
+const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = { blogs: "/blogs", pages: "" };
 
 type Props = { collection: keyof typeof collectionPrefixMap; slug: string };
 

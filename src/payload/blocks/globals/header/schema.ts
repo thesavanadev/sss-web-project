@@ -1,11 +1,13 @@
 import { GlobalConfig } from "payload";
 
 import { anyone } from "@/payload/access/anyone";
+import { authenticated } from "@/payload/access/authenticated";
 
 export const Header: GlobalConfig = {
 	slug: "header",
 	access: {
 		read: anyone,
+		update: authenticated,
 	},
 	fields: [
 		{
@@ -120,7 +122,6 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
-
 					],
 					minRows: 1,
 					maxRows: 5,
@@ -170,7 +171,6 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
-
 					],
 				},
 			],
