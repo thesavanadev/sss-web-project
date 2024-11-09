@@ -26,8 +26,8 @@ const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBL
 export const Blogs: CollectionConfig = {
 	slug: "blogs",
 	labels: {
-		singular: "Blog Post",
-		plural: "Blog Posts",
+		singular: "Blog",
+		plural: "Blogs",
 	},
 	access: {
 		create: authenticated,
