@@ -157,6 +157,7 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
   relatedPosts?: (string | Blog)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -331,6 +332,7 @@ export interface BlogsSelect<T extends boolean = true> {
       };
   publishedOn?: T;
   content?: T;
+  content_html?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
