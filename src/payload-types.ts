@@ -132,6 +132,14 @@ export interface Blog {
   title: string;
   slug?: string | null;
   slugLock?: boolean | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  publishedOn?: string | null;
   content: {
     root: {
       type: string;
@@ -147,7 +155,11 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
-  meta?: {};
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -289,8 +301,24 @@ export interface BlogsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  publishedOn?: T;
   content?: T;
-  meta?: T | {};
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        image?: T;
+        description?: T;
+        preview?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

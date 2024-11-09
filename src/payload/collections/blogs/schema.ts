@@ -7,12 +7,17 @@ import {
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
+
 import { generatePreviewPath } from "@/lib/generate-preview-path";
 
 import { slugField } from "@/payload/fields/slug/schema";
 
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticated-or-published";
+
+import { populateAuthors } from "@/payload/collections/blogs/hooks/populate-authors";
+import { revalidateBlog } from "@/payload/collections/blogs/hooks/revalidate-blog";
 
 import type { CollectionConfig } from "payload";
 
@@ -61,6 +66,61 @@ export const Blogs: CollectionConfig = {
 		},
 		...slugField(),
 		{
+			name: "authors",
+			type: "relationship",
+			relationTo: "users",
+			hasMany: true,
+			admin: {
+				position: "sidebar",
+			},
+		},
+		// This field is only used to populate the user data via the `populateAuthors` hook
+		// This is because the `user` collection has access control locked to protect user privacy
+		// GraphQL will also not return mutated user data that differs from the underlying schema
+		{
+			name: "populatedAuthors",
+			type: "array",
+			access: {
+				update: () => false,
+			},
+			admin: {
+				disabled: true,
+				readOnly: true,
+			},
+			fields: [
+				{
+					name: "id",
+					type: "text",
+				},
+				{
+					name: "name",
+					type: "text",
+				},
+			],
+		},
+		{
+			name: "publishedOn",
+			label: "Published On",
+			type: "date",
+			admin: {
+				date: {
+					pickerAppearance: "dayOnly",
+					displayFormat: "do MMM yyyy",
+				},
+				position: "sidebar",
+			},
+			hooks: {
+				beforeChange: [
+					({ siblingData, value }) => {
+						if (siblingData._status === "published" && !value) {
+							return new Date();
+						}
+						return value;
+					},
+				],
+			},
+		},
+		{
 			type: "tabs",
 			tabs: [
 				{
@@ -93,11 +153,33 @@ export const Blogs: CollectionConfig = {
 				{
 					name: "meta",
 					label: "SEO",
-					fields: [],
+					fields: [
+						OverviewField({
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+							imagePath: "meta.image",
+						}),
+						MetaTitleField({
+							hasGenerateFn: true,
+						}),
+						MetaImageField({
+							relationTo: "media",
+						}),
+						MetaDescriptionField({}),
+						PreviewField({
+							hasGenerateFn: true,
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+						}),
+					],
 				},
 			],
 		},
 	],
+	hooks: {
+		afterChange: [revalidateBlog],
+		afterRead: [populateAuthors],
+	},
 	versions: {
 		drafts: {
 			autosave: {
