@@ -21,6 +21,7 @@ import { populateAuthors } from "@/payload/collections/blogs/hooks/populate-auth
 import { revalidateBlog } from "@/payload/collections/blogs/hooks/revalidate-blog";
 
 import { Banner } from "@/payload/blocks/banner/schema";
+import { Code } from "@/payload/blocks/code/schema";
 
 import type { CollectionConfig } from "payload";
 
@@ -139,7 +140,7 @@ export const Blogs: CollectionConfig = {
 									return [
 										...rootFeatures,
 										HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
-										BlocksFeature({ blocks: [Banner] }),
+										BlocksFeature({ blocks: [Banner, Code] }),
 										FixedToolbarFeature(),
 										InlineToolbarFeature(),
 										HorizontalRuleFeature(),

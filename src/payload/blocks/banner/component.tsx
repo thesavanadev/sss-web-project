@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 // import { RichText } from "@/components/rich-text";
 import { RenderHTML } from "@/components/render-html";
 
-import type { BannerBlock as BannerBlockProps } from "@/payload-types";
+import type { BannerBlocks as BannerBlockProps } from "@/payload-types";
 
 type Props = { className?: string } & BannerBlockProps;
 
