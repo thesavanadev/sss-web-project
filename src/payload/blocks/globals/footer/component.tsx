@@ -5,20 +5,18 @@ import config from "@payload-config";
 
 import { NavigationFooter } from "@/components/navigation-footer";
 
-const data = await getPayloadHMR({ config: config });
-
-const getNavigationFooter = unstable_cache(
-	async () => {
-		return await data.findGlobal({
-			slug: "footer",
-		});
-	},
-	["footer"],
-	{ revalidate: 20, tags: ["footer"] },
-);
-
 export const FooterBlock = async () => {
-	const footer = await getNavigationFooter();
+	const data = await getPayloadHMR({ config: config });
 
-	return <NavigationFooter footer={footer} />;
+	const getNavigationFooter = unstable_cache(
+		async () => {
+			return await data.findGlobal({ slug: "footer" });
+		},
+		["footer"],
+		{ revalidate: 20, tags: ["footer"] },
+	);
+
+	const footerData = await getNavigationFooter();
+
+	return <NavigationFooter footer={footerData} />;
 };
