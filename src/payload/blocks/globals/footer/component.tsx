@@ -13,7 +13,7 @@ export const FooterBlock = async () => {
 			return await data.findGlobal({ slug: "footer" });
 		},
 		["footer"],
-		{ revalidate: 20, tags: ["footer"] },
+		{ revalidate: 60, tags: ["footer"] },
 	);
 
 	const footerData = await getNavigationFooter();

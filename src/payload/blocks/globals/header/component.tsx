@@ -13,7 +13,7 @@ export const HeaderBlock = async () => {
 			return await data.findGlobal({ slug: "header" });
 		},
 		["header"],
-		{ revalidate: 20, tags: ["header"] },
+		{ revalidate: 60, tags: ["header"] },
 	);
 
 	const headerData = await getNavigationHeader();
