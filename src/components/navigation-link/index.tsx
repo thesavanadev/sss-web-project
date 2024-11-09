@@ -7,7 +7,7 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 
 import type { Page, Blog } from "@/payload-types";
 
-type NavigationLinkType = {
+type NavLinkType = {
 	appearance?: "inline" | ButtonProps["variant"];
 	children?: ReactNode;
 	className?: string;
@@ -22,7 +22,7 @@ type NavigationLinkType = {
 	url?: string | null;
 };
 
-export const NavigationLink = (props: NavigationLinkType) => {
+export const NavLink = (props: NavLinkType) => {
 	const { type, appearance = "inline", children, className, label, newTab, reference, size: sizeFromProps, url } = props;
 
 	const href =

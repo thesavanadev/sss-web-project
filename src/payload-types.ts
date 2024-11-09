@@ -576,6 +576,7 @@ export interface BannerBlock {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';

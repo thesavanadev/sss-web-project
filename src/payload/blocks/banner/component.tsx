@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 
-import { RichText } from "@/components/rich-text";
+// import { RichText } from "@/components/rich-text";
+import { RenderHTML } from "@/components/render-html";
 
 import type { BannerBlock as BannerBlockProps } from "@/payload-types";
 
 type Props = { className?: string } & BannerBlockProps;
 
-export const BannerBlock = ({ className, content, style }: Props) => {
+export const BannerBlock = ({ className, content, content_html, style }: Props) => {
 	return (
 		<div className={cn("mx-auto my-8 w-full", className)}>
 			<div
@@ -17,7 +18,8 @@ export const BannerBlock = ({ className, content, style }: Props) => {
 					"border-warning bg-warning/30": style === "warning",
 				})}
 			>
-				<RichText content={content} enableGutter={false} enableProse={false} />
+				{/* <RichText content={content ?? ""} enableGutter={false} enableProse={false} /> */}
+				<RenderHTML html={content_html ?? ""} />
 			</div>
 		</div>
 	);
