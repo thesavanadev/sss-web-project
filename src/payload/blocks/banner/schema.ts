@@ -4,7 +4,7 @@ import type { Block } from "payload";
 
 export const Banner: Block = {
 	slug: "banner",
-	interfaceName: "BannerBlocks",
+	interfaceName: "BannerBlock",
 	fields: [
 		{
 			name: "style",

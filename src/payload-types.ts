@@ -559,9 +559,9 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlocks".
+ * via the `definition` "BannerBlock".
  */
-export interface BannerBlocks {
+export interface BannerBlock {
   style: 'info' | 'warning' | 'error' | 'success';
   content: {
     root: {
@@ -585,9 +585,9 @@ export interface BannerBlocks {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlocks".
+ * via the `definition` "CodeBlock".
  */
-export interface CodeBlocks {
+export interface CodeBlock {
   language?: ('typescript' | 'javascript' | 'css') | null;
   code: string;
   id?: string | null;
