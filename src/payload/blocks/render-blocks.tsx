@@ -1,12 +1,13 @@
-// @ts-nocheck
 import { Fragment } from "react";
 
+import { BannerBlock } from "@/payload/blocks/banner/component";
 import { HeroBlock } from "@/payload/blocks/hero/component";
 
 import type { Page } from "@/payload-types";
 
 // mapping block slugs to their respective components
 const blockComponents = {
+	banner: BannerBlock,
 	hero: HeroBlock,
 };
 

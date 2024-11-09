@@ -19,6 +19,8 @@ import { authenticatedOrPublished } from "@/payload/access/authenticated-or-publ
 import { populateAuthors } from "@/payload/collections/blogs/hooks/populate-authors";
 import { revalidateBlog } from "@/payload/collections/blogs/hooks/revalidate-blog";
 
+import { Banner } from "@/payload/blocks/banner/schema";
+
 import type { CollectionConfig } from "payload";
 
 const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
@@ -136,7 +138,7 @@ export const Blogs: CollectionConfig = {
 									return [
 										...rootFeatures,
 										HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
-										// BlocksFeature({ blocks: [ Banner, Code, MediaBlock ] }),
+										BlocksFeature({ blocks: [Banner] }),
 										FixedToolbarFeature(),
 										InlineToolbarFeature(),
 										HorizontalRuleFeature(),
