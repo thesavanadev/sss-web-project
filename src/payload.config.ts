@@ -8,6 +8,7 @@ import path from "path";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Blogs } from "@/payload/collections/blogs/schema";
 import { Media } from "@/payload/collections/media/schema";
 import { Pages } from "@/payload/collections/pages/schema";
 import { Users } from "@/payload/collections/users/schema";
@@ -16,7 +17,7 @@ import { Footer } from "@/payload/blocks/globals/footer/schema";
 import { Header } from "@/payload/blocks/globals/header/schema";
 
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
-import { Page } from "@/payload-types";
+import { Page, Blog } from "@/payload-types";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,11 +27,11 @@ const resendAPIKey = process.env.RESEND_API_KEY!;
 const uploadthingSecret = process.env.UPLOADTHING_SECRET!;
 const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
 
-const generateTitle: GenerateTitle<Page> = ({ doc }) => {
+const generateTitle: GenerateTitle<Page | Blog> = ({ doc }) => {
 	return doc?.title ? `${doc.title} | Superior Software Solutions` : "Superior Software Solutions";
 };
 
-const generateURL: GenerateURL<Page> = ({ doc }) => {
+const generateURL: GenerateURL<Page | Blog> = ({ doc }) => {
 	return doc?.slug ? `${publicURL}/${doc.slug}` : publicURL;
 };
 
@@ -63,7 +64,7 @@ export default buildConfig({
 		},
 		user: Users.slug,
 	},
-	collections: [Pages, Media, Users],
+	collections: [Pages, Blogs, Media, Users],
 	db: mongooseAdapter({ url: databaseURI }),
 	editor: lexicalEditor({
 		features: () => {
