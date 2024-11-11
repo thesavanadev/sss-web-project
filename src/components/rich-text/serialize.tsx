@@ -1,26 +1,21 @@
-// @ts-nocheck
 import { Fragment, JSX } from "react";
+
 import { DefaultNodeTypes, SerializedBlockNode } from "@payloadcms/richtext-lexical";
 
+import { NavLink } from "@/components/navigation-link";
+
 import { BannerBlock } from "@/payload/blocks/banner/component";
-import { CallToActionBlock } from "@/payload/blocks/call-to-action/component";
 import { CodeBlock, CodeBlockProps } from "@/payload/blocks/code/component";
 import { MediaBlock } from "@/payload/blocks/media-block/component";
 
-import { NavigationLink } from "@/components/navigation-link";
 import { IS_BOLD, IS_CODE, IS_ITALIC, IS_STRIKETHROUGH, IS_SUBSCRIPT, IS_SUPERSCRIPT, IS_UNDERLINE } from "@/components/rich-text/node-format";
 
-import type { Page } from "@/payload-types";
 import type { BannerBlock as BannerBlockProps } from "@/payload-types";
+import type { Page } from "@/payload-types";
 
 export type NodeTypes =
 	| DefaultNodeTypes
-	| SerializedBlockNode<
-			| Extract<Page["layout"][0], { blockType: "ctaBlock" }>
-			| Extract<Page["layout"][0], { blockType: "mediaBlock" }>
-			| BannerBlockProps
-			| CodeBlockProps
-	  >;
+	| SerializedBlockNode<Extract<Page["layout"][0], { blockType: "mediaBlock" }> | BannerBlockProps | CodeBlockProps>;
 
 type Props = {
 	nodes: NodeTypes[];
@@ -109,8 +104,6 @@ export const serializeLexical = ({ nodes }: Props): JSX.Element => {
 					}
 
 					switch (blockType) {
-						case "cta":
-							return <CallToActionBlock key={index} {...block} />;
 						case "mediaBlock":
 							return (
 								<MediaBlock
@@ -192,7 +185,7 @@ export const serializeLexical = ({ nodes }: Props): JSX.Element => {
 							const fields = node.fields;
 
 							return (
-								<NavigationLink
+								<NavLink
 									key={index}
 									newTab={Boolean(fields?.newTab)}
 									reference={fields.doc as any}
@@ -200,7 +193,7 @@ export const serializeLexical = ({ nodes }: Props): JSX.Element => {
 									url={fields.url}
 								>
 									{serializedChildren}
-								</NavigationLink>
+								</NavLink>
 							);
 						}
 

@@ -10,7 +10,9 @@ import { authenticatedOrPublished } from "@/payload/access/authenticated-or-publ
 import { populatePublishedOn } from "@/payload/collections/pages/hooks/populate-published-on";
 import { revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 
+import { CallToAction } from "@/payload/blocks/call-to-action/schema";
 import { Hero } from "@/payload/blocks/hero/schema";
+import { MediaBlock } from "@/payload/blocks/media-block/schema";
 
 import type { CollectionConfig } from "payload";
 
@@ -85,7 +87,7 @@ export const Pages: CollectionConfig = {
 							},
 							type: "blocks",
 							required: true,
-							blocks: [Hero],
+							blocks: [Hero, MediaBlock, CallToAction],
 						},
 					],
 				},

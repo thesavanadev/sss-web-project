@@ -1,3 +1,5 @@
+import { FixedToolbarFeature, HTMLConverterFeature, InlineToolbarFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
+
 import { anyone } from "@/payload/access/anyone";
 import { authenticated } from "@/payload/access/authenticated";
 
@@ -10,7 +12,7 @@ export const Media: CollectionConfig = {
 		plural: "Media",
 	},
 	admin: {
-		defaultColumns: ["filename", "mimeType", "alt", "createdAt", "updatedAt"],
+		defaultColumns: ["filename", "mimeType", "alt", "caption", "createdAt", "updatedAt"],
 		useAsTitle: "alt",
 	},
 	access: {
@@ -25,6 +27,17 @@ export const Media: CollectionConfig = {
 			type: "text",
 			required: true,
 		},
+		{
+			name: "caption",
+			type: "richText",
+			required: false,
+			editor: lexicalEditor({
+				features: ({ rootFeatures }) => {
+					return [...rootFeatures, FixedToolbarFeature(), HTMLConverterFeature({}), InlineToolbarFeature()];
+				},
+			}),
+		},
+		lexicalHTML("caption", { name: "caption_html" }),
 	],
 	upload: {
 		mimeTypes: ["image/*"],
