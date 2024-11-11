@@ -11,7 +11,7 @@ export const RenderImage = ({ src, alt }: RenderImageProps) => {
 			priority
 			quality={89}
 			sizes="(max-width: 640px) 100vw, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1280px) 1024px, 1280px"
-			className="absolute max-h-full max-w-full object-contain"
+			className="absolute max-h-full max-w-full object-cover"
 		/>
 	);
 };

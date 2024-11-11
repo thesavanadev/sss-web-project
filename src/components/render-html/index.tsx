@@ -1,9 +1,9 @@
 type RenderHTMLProps = {
-	html_content: string;
+	content: string | null | undefined;
 };
 
-export const RenderHTML = ({ html_content }: RenderHTMLProps) => {
-	const markup = { __html: html_content };
+export const RenderHTML = ({ content }: RenderHTMLProps) => {
+	const markup = { __html: content || "" };
 
 	return (
 		<div

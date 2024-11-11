@@ -5,20 +5,18 @@ import config from "@payload-config";
 
 import { NavigationHeader } from "@/components/navigation-header";
 
-const data = await getPayloadHMR({ config: config });
-
-const getNavigationHeader = unstable_cache(
-	async () => {
-		return await data.findGlobal({
-			slug: "header",
-		});
-	},
-	["header"],
-	{ revalidate: 20, tags: ["header"] },
-);
-
 export const HeaderBlock = async () => {
-	const header = await getNavigationHeader();
+	const data = await getPayloadHMR({ config: config });
 
-	return <NavigationHeader header={header} />;
+	const getNavigationHeader = unstable_cache(
+		async () => {
+			return await data.findGlobal({ slug: "header" });
+		},
+		["header"],
+		{ revalidate: 60, tags: ["header"] },
+	);
+
+	const headerData = await getNavigationHeader();
+
+	return <NavigationHeader header={headerData} />;
 };

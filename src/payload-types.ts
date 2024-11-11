@@ -79,23 +79,54 @@ export interface Page {
   slug?: string | null;
   slugLock?: boolean | null;
   publishedOn?: string | null;
-  layout: {
-    heroType?: ('homepage' | 'subpage') | null;
-    heroCover: string | Media;
-    heroSubtitle?: string | null;
-    heroTitle: string;
-    heroMessage?: string | null;
-    heroCTA?:
-      | {
-          heroCTALabel: string;
-          heroCTAUrl: string;
+  layout: (
+    | {
+        heroType?: ('homepage' | 'subpage') | null;
+        heroCover: string | Media;
+        heroSubtitle?: string | null;
+        heroTitle: string;
+        heroMessage?: string | null;
+        heroCTA?:
+          | {
+              heroCTALabel: string;
+              heroCTAUrl: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | MediaBlock
+    | {
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        richText_html?: string | null;
+        ctaLink: {
+          navigationLinkLabel: string;
+          navigationLinkURL: string;
+          navigationLinkNewTab?: boolean | null;
           id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'hero';
-  }[];
+        }[];
+        ctaCover: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cta';
+      }
+  )[];
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -112,6 +143,22 @@ export interface Page {
 export interface Media {
   id: string;
   alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  caption_html?: string | null;
   _key?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -124,6 +171,17 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  position?: ('default' | 'fullscreen') | null;
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -157,6 +215,7 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
   relatedPosts?: (string | Blog)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -300,6 +359,31 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        mediaBlock?:
+          | T
+          | {
+              position?: T;
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              richText?: T;
+              richText_html?: T;
+              ctaLink?:
+                | T
+                | {
+                    navigationLinkLabel?: T;
+                    navigationLinkURL?: T;
+                    navigationLinkNewTab?: T;
+                    id?: T;
+                  };
+              ctaCover?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -331,6 +415,7 @@ export interface BlogsSelect<T extends boolean = true> {
       };
   publishedOn?: T;
   content?: T;
+  content_html?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
@@ -364,6 +449,8 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
+  caption_html?: T;
   _key?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -554,6 +641,43 @@ export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BannerBlock".
+ */
+export interface BannerBlock {
+  style: 'info' | 'warning' | 'error' | 'success';
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  content_html?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CodeBlock".
+ */
+export interface CodeBlock {
+  language?: ('typescript' | 'javascript' | 'css') | null;
+  code: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

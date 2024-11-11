@@ -161,7 +161,6 @@ export const Header: GlobalConfig = {
 								width: "50%",
 							},
 						},
-
 						{
 							name: "navigationLinkNewTab",
 							label: "Open in New Tab",
