@@ -7,15 +7,13 @@ import {
 	lexicalHTML,
 } from "@payloadcms/richtext-lexical";
 
-import { linkGroup } from "@/payload/fields/link/link-group";
-
-import type { Block } from "payload";
+import { Block } from "payload";
 
 export const CallToAction: Block = {
 	slug: "cta",
 	labels: {
-		plural: "Calls to Action",
-		singular: "Call to Action",
+		plural: "Calls to Action Blocks",
+		singular: "Call to Action Block",
 	},
 	fields: [
 		{
@@ -35,9 +33,55 @@ export const CallToAction: Block = {
 			}),
 		},
 		lexicalHTML("richText", { name: "richText_html" }),
-		linkGroup({
-			appearances: ["default", "outline"],
-			overrides: { maxRows: 2 },
-		}),
+		{
+			name: "ctaLink",
+			label: "Call to Action Link",
+			labels: {
+				singular: "Call to Action Link",
+				plural: "Calls to Action Links",
+			},
+			type: "array",
+			required: true,
+			fields: [
+				{
+					type: "row",
+					fields: [
+						{
+							name: "navigationLinkLabel",
+							label: "Navigation Link Label",
+							type: "text",
+							required: true,
+							admin: {
+								width: "50%",
+							},
+						},
+						{
+							name: "navigationLinkURL",
+							label: "Navigation Link URL",
+							type: "text",
+							required: true,
+							admin: {
+								width: "50%",
+							},
+						},
+						{
+							name: "navigationLinkNewTab",
+							label: "Open in New Tab",
+							type: "checkbox",
+							required: false,
+						},
+					],
+				},
+			],
+			minRows: 1,
+			maxRows: 1,
+		},
+		{
+			name: "ctaCover",
+			label: "Cover Image",
+			type: "upload",
+			relationTo: "media",
+			required: true,
+		},
 	],
 };

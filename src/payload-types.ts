@@ -115,22 +115,13 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         richText_html?: string | null;
-        links?:
-          | {
-              link: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?: {
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null;
-                url?: string | null;
-                label: string;
-                appearance?: ('default' | 'outline') | null;
-              };
-              id?: string | null;
-            }[]
-          | null;
+        ctaLink: {
+          navigationLinkLabel: string;
+          navigationLinkURL: string;
+          navigationLinkNewTab?: boolean | null;
+          id?: string | null;
+        }[];
+        ctaCover: string | Media;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cta';
@@ -381,21 +372,15 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               richText?: T;
               richText_html?: T;
-              links?:
+              ctaLink?:
                 | T
                 | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                        };
+                    navigationLinkLabel?: T;
+                    navigationLinkURL?: T;
+                    navigationLinkNewTab?: T;
                     id?: T;
                   };
+              ctaCover?: T;
               id?: T;
               blockName?: T;
             };
