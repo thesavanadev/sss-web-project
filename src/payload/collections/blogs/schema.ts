@@ -3,10 +3,11 @@ import {
 	FixedToolbarFeature,
 	HeadingFeature,
 	HorizontalRuleFeature,
+	HTMLConverterFeature,
 	InlineToolbarFeature,
 	lexicalEditor,
+	lexicalHTML,
 } from "@payloadcms/richtext-lexical";
-
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 
 import { generatePreviewPath } from "@/lib/generate-preview-path";
@@ -19,6 +20,9 @@ import { authenticatedOrPublished } from "@/payload/access/authenticated-or-publ
 import { populateAuthors } from "@/payload/collections/blogs/hooks/populate-authors";
 import { revalidateBlog } from "@/payload/collections/blogs/hooks/revalidate-blog";
 
+import { Banner } from "@/payload/blocks/banner/schema";
+import { Code } from "@/payload/blocks/code/schema";
+
 import type { CollectionConfig } from "payload";
 
 const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
@@ -26,8 +30,8 @@ const publicURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBL
 export const Blogs: CollectionConfig = {
 	slug: "blogs",
 	labels: {
-		singular: "Blog Post",
-		plural: "Blog Posts",
+		singular: "Blog",
+		plural: "Blogs",
 	},
 	access: {
 		create: authenticated,
@@ -136,14 +140,16 @@ export const Blogs: CollectionConfig = {
 									return [
 										...rootFeatures,
 										HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
-										// BlocksFeature({ blocks: [ Banner, Code, MediaBlock ] }),
+										BlocksFeature({ blocks: [Banner, Code] }),
 										FixedToolbarFeature(),
 										InlineToolbarFeature(),
 										HorizontalRuleFeature(),
+										HTMLConverterFeature({}),
 									];
 								},
 							}),
 						},
+						lexicalHTML("content", { name: "content_html" }),
 					],
 				},
 				{
