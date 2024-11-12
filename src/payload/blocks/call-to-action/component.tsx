@@ -26,10 +26,10 @@ export const CallToActionBlock = ({ ctaContent_html, ctaLink, ctaCover }: CallTo
 						</div>
 					</div>
 
-					<div className="max-w-xl space-y-5 px-5 py-12 lg:w-1/2">
-						<div className="flex items-center justify-center">{ctaContent_html && <RenderHTML content={ctaContent_html} />}</div>
+					<div className="max-w-2xl space-y-8 px-5 py-[34px] lg:w-1/2">
+						<>{ctaContent_html && <RenderHTML content={ctaContent_html} />}</>
 
-						<div className="mt-6">
+						<>
 							{ctaLink && (
 								<Button size="lg" className="inline-flex w-full rounded-lg font-semibold uppercase sm:w-auto">
 									{ctaLink?.map((link, i) => {
@@ -41,7 +41,7 @@ export const CallToActionBlock = ({ ctaContent_html, ctaLink, ctaCover }: CallTo
 									})}
 								</Button>
 							)}
-						</div>
+						</>
 					</div>
 				</div>
 			</div>
