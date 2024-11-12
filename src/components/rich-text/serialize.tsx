@@ -108,9 +108,9 @@ export const serializeLexical = ({ nodes }: Props): JSX.Element => {
 							return (
 								<MediaBlock
 									className="col-span-3 col-start-1"
-									imgClassName="m-0"
 									key={index}
 									{...block}
+									imgClassName="m-0"
 									captionClassName="mx-auto max-w-[48rem]"
 									enableGutter={false}
 									disableInnerContainer={true}
