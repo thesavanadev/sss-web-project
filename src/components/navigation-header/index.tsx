@@ -76,7 +76,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 					<Sheet>
 						<SheetTrigger asChild>
 							<Button variant="ghost" size="icon" className="lg:hidden">
-								<Menu className="h-6 w-6" />
+								<Menu className="h-6 w-6 text-primary" />
 							</Button>
 						</SheetTrigger>
 
