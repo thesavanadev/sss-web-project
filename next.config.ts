@@ -13,6 +13,13 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "s3.co.ke",
+				port: "",
+			},
+			{
+				protocol: "https",
+				hostname: "utfs.io",
+				port: "",
+				pathname: "/a/lvo9tx8j15/**",
 			},
 		],
 	},

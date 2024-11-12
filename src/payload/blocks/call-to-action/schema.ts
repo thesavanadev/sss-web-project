@@ -17,9 +17,17 @@ export const CallToAction: Block = {
 	},
 	fields: [
 		{
-			name: "richText",
-			label: false,
+			name: "ctaCover",
+			label: "Cover Image",
+			type: "upload",
+			relationTo: "media",
+			required: true,
+		},
+		{
+			name: "ctaContent",
+			label: "Content",
 			type: "richText",
+			required: true,
 			editor: lexicalEditor({
 				features: ({ rootFeatures }) => {
 					return [
@@ -32,7 +40,7 @@ export const CallToAction: Block = {
 				},
 			}),
 		},
-		lexicalHTML("richText", { name: "richText_html" }),
+		lexicalHTML("ctaContent", { name: "ctaContent_html" }),
 		{
 			name: "ctaLink",
 			label: "Call to Action Link",
@@ -41,7 +49,7 @@ export const CallToAction: Block = {
 				plural: "Calls to Action Links",
 			},
 			type: "array",
-			required: true,
+			required: false,
 			fields: [
 				{
 					type: "row",
@@ -75,13 +83,6 @@ export const CallToAction: Block = {
 			],
 			minRows: 1,
 			maxRows: 1,
-		},
-		{
-			name: "ctaCover",
-			label: "Cover Image",
-			type: "upload",
-			relationTo: "media",
-			required: true,
 		},
 	],
 };
