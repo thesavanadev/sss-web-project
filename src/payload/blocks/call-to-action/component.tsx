@@ -6,12 +6,12 @@ import { RenderHTML } from "@/components/render-html";
 import { RenderImage } from "@/components/render-image";
 
 type CallToActionBlockProps = {
-	richText_html: string;
+	ctaContent_html: string;
 	ctaLink: { navigationLinkLabel: string; navigationLinkURL: string; navigationLinkNewTab?: boolean }[];
 	ctaCover: { url: string; alt: string };
 };
 
-export const CallToActionBlock = ({ richText_html, ctaLink, ctaCover }: CallToActionBlockProps) => {
+export const CallToActionBlock = ({ ctaContent_html, ctaLink, ctaCover }: CallToActionBlockProps) => {
 	const serverURL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_SERVER_URL_DEV! : process.env.NEXT_PUBLIC_SERVER_URL_PRD!;
 	const src = ctaCover && typeof ctaCover === "object" ? ctaCover.url : null;
 	const alt = ctaCover && typeof ctaCover === "object" ? ctaCover.alt : null;
@@ -27,7 +27,7 @@ export const CallToActionBlock = ({ richText_html, ctaLink, ctaCover }: CallToAc
 					</div>
 
 					<div className="max-w-xl space-y-5 px-5 py-12 lg:w-1/2">
-						<div className="flex items-center justify-center">{richText_html && <RenderHTML content={richText_html} />}</div>
+						<div className="flex items-center justify-center">{ctaContent_html && <RenderHTML content={ctaContent_html} />}</div>
 
 						<div className="mt-6">
 							{ctaLink && (

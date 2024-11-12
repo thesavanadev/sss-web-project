@@ -99,7 +99,8 @@ export interface Page {
       }
     | MediaBlock
     | {
-        richText?: {
+        ctaCover: string | Media;
+        ctaContent: {
           root: {
             type: string;
             children: {
@@ -113,15 +114,16 @@ export interface Page {
             version: number;
           };
           [k: string]: unknown;
-        } | null;
-        richText_html?: string | null;
-        ctaLink: {
-          navigationLinkLabel: string;
-          navigationLinkURL: string;
-          navigationLinkNewTab?: boolean | null;
-          id?: string | null;
-        }[];
-        ctaCover: string | Media;
+        };
+        ctaContent_html?: string | null;
+        ctaLink?:
+          | {
+              navigationLinkLabel: string;
+              navigationLinkURL: string;
+              navigationLinkNewTab?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cta';
@@ -370,8 +372,9 @@ export interface PagesSelect<T extends boolean = true> {
         cta?:
           | T
           | {
-              richText?: T;
-              richText_html?: T;
+              ctaCover?: T;
+              ctaContent?: T;
+              ctaContent_html?: T;
               ctaLink?:
                 | T
                 | {
@@ -380,7 +383,6 @@ export interface PagesSelect<T extends boolean = true> {
                     navigationLinkNewTab?: T;
                     id?: T;
                   };
-              ctaCover?: T;
               id?: T;
               blockName?: T;
             };
