@@ -1,6 +1,7 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { resendAdapter } from "@payloadcms/email-resend";
-import { BoldFeature, ItalicFeature, LinkFeature, ParagraphFeature, UnderlineFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
+import { BoldFeature, ItalicFeature, LinkFeature, ParagraphFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
+import { UnderlineFeature } from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { buildConfig } from "payload";
@@ -75,7 +76,7 @@ export default buildConfig({
 				BoldFeature(),
 				ItalicFeature(),
 				LinkFeature({
-					enabledCollections: ["pages"],
+					enabledCollections: ["pages", "blogs"],
 					fields: ({ defaultFields }) => {
 						const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
 							if ("name" in field && field.name === "url") return false;

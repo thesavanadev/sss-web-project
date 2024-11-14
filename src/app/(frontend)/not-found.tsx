@@ -6,14 +6,16 @@ import { Container } from "@/components/container";
 const NotFound = () => {
 	return (
 		<Container>
-			<div className="px-3 py-64">
+			<div className="py-64">
 				<div className="prose max-w-none">
-					<h1 className="font-header text-primary">404</h1>
-					<p className="mb-5 text-foreground">The page you are looking for could not be found.</p>
+					<h1 className="text-primary" style={{ marginBottom: 0 }}>
+						404
+					</h1>
+					<p className="mb-4 text-foreground">The page you are looking for could not be found.</p>
 				</div>
 
-				<Button asChild>
-					<Link href="/">Go Home</Link>
+				<Button size="lg" className="rounded-lg font-semibold uppercase">
+					<Link href="/home">Return to the Homepage</Link>
 				</Button>
 			</div>
 		</Container>

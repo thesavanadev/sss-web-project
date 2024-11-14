@@ -7,7 +7,7 @@ import {
 	lexicalHTML,
 } from "@payloadcms/richtext-lexical";
 
-import { Block } from "payload";
+import type { Block } from "payload";
 
 export const CallToAction: Block = {
 	slug: "cta",
@@ -32,10 +32,10 @@ export const CallToAction: Block = {
 				features: ({ rootFeatures }) => {
 					return [
 						...rootFeatures,
-						FixedToolbarFeature(),
 						HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
-						HTMLConverterFeature({}),
+						FixedToolbarFeature(),
 						InlineToolbarFeature(),
+						HTMLConverterFeature({}),
 					];
 				},
 			}),
