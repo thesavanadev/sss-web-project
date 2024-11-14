@@ -21,7 +21,7 @@ export const NavigationFooter = ({ footer }: NavigationFooterProps) => {
 			<Container className="py-8">
 				<div className="gap-8 lg:flex">
 					<div className="w-full lg:w-2/5">
-						<Link href="/" className="flex items-center gap-2 text-primary">
+						<Link href="/home" className="flex items-center gap-2 text-primary">
 							<div className="relative h-8 w-8">
 								<RenderImage src={`${serverURL}${src}`} alt={`${serverURL}${alt}`} />
 							</div>

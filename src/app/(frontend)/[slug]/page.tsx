@@ -12,28 +12,6 @@ import { RenderBlocks } from "@/payload/blocks/render-blocks";
 import type { Metadata } from "next";
 import type { Page } from "@/payload-types";
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = await draftMode();
-
-	const parsedSlug = decodeURIComponent(slug);
-
-	const payload = await getPayloadHMR({ config: config });
-
-	const result = await payload.find({
-		collection: "pages",
-		draft,
-		limit: 1,
-		overrideAccess: draft,
-		where: {
-			slug: {
-				equals: parsedSlug,
-			},
-		},
-	});
-
-	return result.docs?.[0] || null;
-});
-
 export const generateStaticParams = async () => {
 	const payload = await getPayloadHMR({ config: config });
 
@@ -55,9 +33,7 @@ export const generateStaticParams = async () => {
 	return params;
 };
 
-type Args = {
-	params: Promise<{ slug?: string }>;
-};
+type Args = { params: Promise<{ slug?: string }> };
 
 const Page = async ({ params: paramsPromise }: Args) => {
 	const { slug = "home" } = await paramsPromise;
@@ -88,3 +64,25 @@ export const generateMetadata = async ({ params: paramsPromise }: Args): Promise
 
 	return generateMeta({ doc: page });
 };
+
+const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+	const { isEnabled: draft } = await draftMode();
+
+	const parsedSlug = decodeURIComponent(slug);
+
+	const payload = await getPayloadHMR({ config: config });
+
+	const result = await payload.find({
+		collection: "pages",
+		draft,
+		limit: 1,
+		overrideAccess: draft,
+		where: {
+			slug: {
+				equals: parsedSlug,
+			},
+		},
+	});
+
+	return result.docs?.[0] || null;
+});
