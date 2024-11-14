@@ -37,7 +37,7 @@ export const NavigationHeader = ({ header }: NavigationHeaderProps) => {
 		>
 			<Container className="py-5">
 				<div className="flex items-center justify-between">
-					<Link href="/home" className="flex items-center gap-2 text-primary">
+					<Link href="/" className="flex items-center gap-2 text-primary">
 						<div className="relative h-8 w-8">
 							<RenderImage src={`${serverURL}${src}`} alt={`${serverURL}${alt}`} />
 						</div>
