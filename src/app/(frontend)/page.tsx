@@ -1,3 +1,5 @@
-import PageTemplate from "@/frontend/[slug]/page";
+import PageTemplate, { generateMetadata } from "@/frontend/[slug]/page";
 
 export default PageTemplate;
+
+export { generateMetadata };

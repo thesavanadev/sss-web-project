@@ -2,27 +2,31 @@
 
 import { MouseEvent, useCallback, useEffect } from "react";
 
-import { useField, useFieldProps, Button, TextInput, FieldLabel, useFormFields, useForm } from "@payloadcms/ui";
+import { TextFieldClientProps } from "payload";
+
+import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from "@payloadcms/ui";
 
 import { formatSlug } from "@/payload/fields/slug/hooks/format-slug";
 
-import { TextFieldClientProps } from "payload";
-
-import "@/payload/fields/slug/schema.scss";
+import "@/payload/fields/slug/schema";
 
 type SlugComponentProps = {
 	fieldToUse: string;
 	checkboxFieldPath: string;
 } & TextFieldClientProps;
 
-export const SlugComponent = ({ field, fieldToUse, checkboxFieldPath: checkboxFieldPathFromProps }: SlugComponentProps) => {
+export const SlugComponent = ({
+	field,
+	fieldToUse,
+	checkboxFieldPath: checkboxFieldPathFromProps,
+	path,
+	readOnly: readOnlyFromProps,
+}: SlugComponentProps) => {
 	const { label } = field;
 
-	const { path, readOnly: readOnlyFromProps } = useFieldProps();
+	const checkboxFieldPath = path?.includes(".") ? `${path}.${checkboxFieldPathFromProps}` : checkboxFieldPathFromProps;
 
-	const checkboxFieldPath = path.includes(".") ? `${path}.${checkboxFieldPathFromProps}` : checkboxFieldPathFromProps;
-
-	const { value, setValue } = useField<string>({ path });
+	const { value, setValue } = useField<string>({ path: path || field.name });
 
 	const { dispatchFields } = useForm();
 
@@ -50,7 +54,7 @@ export const SlugComponent = ({ field, fieldToUse, checkboxFieldPath: checkboxFi
 	}, [targetFieldValue, checkboxValue, setValue, value]);
 
 	const handleLock = useCallback(
-		(e: MouseEvent) => {
+		(e: MouseEvent<Element>) => {
 			e.preventDefault();
 
 			dispatchFields({
@@ -67,14 +71,14 @@ export const SlugComponent = ({ field, fieldToUse, checkboxFieldPath: checkboxFi
 	return (
 		<div className="field-type slug-field-component">
 			<div className="label-wrapper">
-				<FieldLabel field={field} htmlFor={`field-${path}`} label={label} />
+				<FieldLabel htmlFor={`field-${path}`} label={label} />
 
 				<Button className="lock-button" buttonStyle="none" onClick={handleLock}>
 					{checkboxValue ? "Unlock" : "Lock"}
 				</Button>
 			</div>
 
-			<TextInput value={value} onChange={setValue} path={path} readOnly={Boolean(readOnly)} />
+			<TextInput value={value} onChange={setValue} path={path || field.name} readOnly={Boolean(readOnly)} />
 		</div>
 	);
 };
