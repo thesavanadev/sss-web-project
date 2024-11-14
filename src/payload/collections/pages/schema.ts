@@ -11,6 +11,7 @@ import { populatePublishedOn } from "@/payload/collections/pages/hooks/populate-
 import { revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 
 import { CallToAction } from "@/payload/blocks/call-to-action/schema";
+import { ContentPad } from "@/payload/blocks/content-pad/schema";
 import { Hero } from "@/payload/blocks/hero/schema";
 import { MediaBlock } from "@/payload/blocks/media-block/schema";
 
@@ -87,7 +88,7 @@ export const Pages: CollectionConfig = {
 							},
 							type: "blocks",
 							required: true,
-							blocks: [Hero, MediaBlock, CallToAction],
+							blocks: [Hero, MediaBlock, CallToAction, ContentPad],
 						},
 					],
 				},

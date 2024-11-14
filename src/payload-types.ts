@@ -128,6 +128,27 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cta';
       }
+    | {
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        content_html?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentPad';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -383,6 +404,14 @@ export interface PagesSelect<T extends boolean = true> {
                     navigationLinkNewTab?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        contentPad?:
+          | T
+          | {
+              content?: T;
+              content_html?: T;
               id?: T;
               blockName?: T;
             };
