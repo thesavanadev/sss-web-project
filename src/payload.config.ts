@@ -6,10 +6,10 @@ import {
 	LinkFeature,
 	OrderedListFeature,
 	ParagraphFeature,
+	UnderlineFeature,
 	UnorderedListFeature,
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { UnderlineFeature } from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { buildConfig } from "payload";
