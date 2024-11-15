@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import { CallToActionBlock } from "@/payload/blocks/call-to-action/component";
+import { ContentPadBlock } from "@/payload/blocks/content-pad/component";
 import { HeroBlock } from "@/payload/blocks/hero/component";
 import { MediaBlock } from "@/payload/blocks/media-block/component";
 
@@ -8,6 +9,7 @@ import type { Page } from "@/payload-types";
 
 // mapping block slugs to their respective components
 const blockComponents = {
+	contentPad: ContentPadBlock,
 	cta: CallToActionBlock,
 	hero: HeroBlock,
 	mediaBlock: MediaBlock,

@@ -1,6 +1,6 @@
 {
 	"name": "sss-web-project",
-	"version": "0.20.49",
+	"version": "0.22.56",
 	"description": "Superior Software Solutions website project.",
 	"license": "MIT",
 	"type": "module",
@@ -39,7 +39,7 @@
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
 		"embla-carousel-react": "^8.3.1",
-		"framer-motion": "^11.11.15",
+		"framer-motion": "^11.11.17",
 		"graphql": "^16.9.0",
 		"jsonwebtoken": "^9.0.2",
 		"lexical": "0.20.0",
@@ -70,7 +70,7 @@
 		"postcss": "^8.4.49",
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.8",
-		"tailwindcss": "^3.4.14",
+		"tailwindcss": "^3.4.15",
 		"typescript": "5.6.3"
 	},
 	"engines": {

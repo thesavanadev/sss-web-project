@@ -1,7 +1,15 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { resendAdapter } from "@payloadcms/email-resend";
-import { BoldFeature, ItalicFeature, LinkFeature, ParagraphFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
-import { UnderlineFeature } from "@payloadcms/richtext-lexical";
+import {
+	BoldFeature,
+	ItalicFeature,
+	LinkFeature,
+	OrderedListFeature,
+	ParagraphFeature,
+	UnderlineFeature,
+	UnorderedListFeature,
+	lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { buildConfig } from "payload";
@@ -71,8 +79,6 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: () => {
 			return [
-				ParagraphFeature(),
-				UnderlineFeature(),
 				BoldFeature(),
 				ItalicFeature(),
 				LinkFeature({
@@ -97,6 +103,10 @@ export default buildConfig({
 						];
 					},
 				}),
+				OrderedListFeature(),
+				UnorderedListFeature(),
+				ParagraphFeature(),
+				UnderlineFeature(),
 			];
 		},
 	}),
